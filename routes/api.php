@@ -2,6 +2,7 @@
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\AuthController;
+use App\Http\Controllers\ExperienceController;
 use App\Http\Controllers\MemberController;
 use App\Http\Controllers\MemberDetailController;
 
@@ -38,9 +39,15 @@ Route::group([
     // member endpoints
     Route::get('/members', [MemberController::class, 'show']);
     Route::post('/members/create', [MemberController::class, 'create']);
-    Route::put('/members/{id}/update', [MemberController::class, 'update']);
+    Route::put('/members/{member}/update', [MemberController::class, 'update']);
 
     // member details endpoint
-    Route::get('/member-details/{id}', [MemberDetailController::class, 'showByMember']);
-    Route::put('/member-details/{id}/update', [MemberDetailController::class, 'update']);
+    Route::get('/member-details/{member}', [MemberDetailController::class, 'showByMember']);
+    Route::put('/member-details/{detail}/update', [MemberDetailController::class, 'update']);
+
+    // member Experience
+    Route::get('/experiences', [ExperienceController::class, 'show']);
+    Route::get('/member-experiences/{member}', [ExperienceController::class, 'showByMember']);
+    Route::post('/member-experiences/create', [ExperienceController::class, 'create']);
+    Route::put('/member-experiences/{experience}/update', [ExperienceController::class, 'update']);
 });
