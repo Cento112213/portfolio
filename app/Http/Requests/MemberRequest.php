@@ -22,7 +22,14 @@ class MemberRequest extends FormRequest
     public function rules(): array
     {
         return [
-            'domain' => ['required', 'unique:members']
+            'domain' => ['required', 'unique:members'],
+            'first_name' => ['required', 'string'],
+            'last_name' => ['required', 'string'],
+            'address' => ['required', 'string'],
+            'email' => ['required', 'email', 'unique:member_details'],
+            'linkedin' => ['required', 'string'],
+            'contact_number' => ['required', 'string'],
+            'profile_photo' => ['required', 'image', 'mimes:jpeg,png,jpg,gif'],
         ];
     }
 }
