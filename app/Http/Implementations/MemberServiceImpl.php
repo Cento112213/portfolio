@@ -3,11 +3,17 @@
 namespace App\Http\Implementations;
 
 use App\Http\Requests\MemberRequest;
+use App\Http\Services\MemberDetailService;
 use App\Http\Services\MemberService;
 use App\Models\Member;
 
 Class MemberServiceImpl implements MemberService
 {
+    public function __construct(protected MemberDetailService $memberDetailService)
+    {
+        
+    }
+
     public function show()
     {
         $members = Member::all();
@@ -22,7 +28,7 @@ Class MemberServiceImpl implements MemberService
     public function create(MemberRequest $request)
     {
         $member = Member::create($request->only('domain'));
-
+        $this->memberDetailService->create($request, $member->id);
         if (!$member) {
             return response()->json([
                 'success' => false,
@@ -52,7 +58,7 @@ Class MemberServiceImpl implements MemberService
 
         return response()->json([
             'success' => true,
-            'message' =>  'successfully updated member domain',
+            'message' => 'successfully updated member domain',
             'data' => $member
         ]);
     }

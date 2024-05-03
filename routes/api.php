@@ -3,6 +3,7 @@ use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\AuthController;
 use App\Http\Controllers\MemberController;
+use App\Http\Controllers\MemberDetailController;
 
 /*
 |--------------------------------------------------------------------------
@@ -39,4 +40,7 @@ Route::group([
     Route::post('/members/create', [MemberController::class, 'create']);
     Route::put('/members/{id}/update', [MemberController::class, 'update']);
 
+    // member details endpoint
+    Route::get('/member-details/{id}', [MemberDetailController::class, 'showByMember']);
+    Route::put('/member-details/{id}/update', [MemberDetailController::class, 'update']);
 });
